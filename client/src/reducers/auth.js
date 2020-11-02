@@ -2,7 +2,11 @@ import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
     USER_LOADED,
-    AUTH_ERROR
+    AUTH_ERROR,
+    LOGIN_SUCCESS,
+    LOGIN_FAIL,
+    LOGOUT,
+    ACCOUNT_DELETED
 } from '../actions/types';
 
 const initialState = {
@@ -12,6 +16,7 @@ const initialState = {
     user: null
 }
 
+// eslint-disable-next-line
 export default (state = initialState, action) => {
     const { type, payload } = action;
 
@@ -24,6 +29,7 @@ export default (state = initialState, action) => {
                 user: payload
             }
         case REGISTER_SUCCESS:
+        case LOGIN_SUCCESS:
             localStorage.setItem('token', payload.token);
             return {
                 ...state,
@@ -33,6 +39,9 @@ export default (state = initialState, action) => {
             }
         case REGISTER_FAIL:
         case AUTH_ERROR:
+        case LOGIN_FAIL:
+        case LOGOUT:
+        case ACCOUNT_DELETED:
             localStorage.removeItem('token');
             return {
                 ...state,

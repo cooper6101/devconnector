@@ -60,7 +60,7 @@ export default function(state = initialState, action) {
         case ADD_COMMENT:
             return {
                 ...state,
-                post: { ...state.post, comment: payload },
+                post: { comment: payload, ...state.post },
                 loading: false
             }
         case REMOVE_COMMENT:
